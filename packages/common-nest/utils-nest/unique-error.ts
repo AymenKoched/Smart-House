@@ -18,14 +18,12 @@ export function handleError(err): string[] {
   }
 
   if (err.message.includes('Cannot insert duplicate key row in object')) {
+    // lampe
     if (err.message.includes('IDX_5b1ce748cfe6a159661abc8925')) {
-      errors.push('this lampe name exist in this carte');
+      errors.push('this lampe exist in this carte');
     }
     if (err.message.includes('IDX_4c989136240fa7a5c43ba3e965')) {
-      errors.push('this lampe name exist in this etage');
-    }
-    if (err.message.includes('IDX_fadb00244eca86438c5da70162')) {
-      errors.push('this pin already used');
+      errors.push('this lampe exist in this etage');
     }
   }
 
@@ -35,10 +33,10 @@ export function handleError(err): string[] {
     )
   ) {
     if (err.message.includes('FK_fe5f5937ef510b64f7e0030dc0b')) {
-      errors.push('this carte does not  exist');
+      errors.push('this carte does not exist');
     }
     if (err.message.includes('FK_f370825e85bdcd944ad2c0fbe3a')) {
-      errors.push('this etage does not  exist');
+      errors.push('this etage does not exist');
     }
   }
 

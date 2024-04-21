@@ -1,8 +1,7 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../../packages';
 import { Expose } from 'class-transformer';
-import { LampeEntity } from '../../lampes';
-import { StoreEntity } from '../../stores';
+import { LampeEntity, StoreEntity } from '../../devices';
 
 @Entity({ name: 'etages' })
 export class EtageEntity extends BaseEntity {

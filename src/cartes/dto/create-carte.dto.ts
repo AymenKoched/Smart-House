@@ -1,7 +1,6 @@
 import { BaseModel, Trim } from '../../../packages';
 import { Type } from 'class-transformer';
-import { LampeEntity } from '../../lampes';
-import { StoreEntity } from '../../stores';
+import { LampeEntity, StoreEntity } from '../../devices';
 import { IsNotEmpty, IsOptional, Min } from 'class-validator';
 
 export class createCarteDto extends BaseModel {

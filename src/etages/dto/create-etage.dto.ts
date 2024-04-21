@@ -1,8 +1,7 @@
 import { IsNotEmpty, IsOptional, Min } from 'class-validator';
 import { Type } from 'class-transformer';
-import { LampeEntity } from '../../lampes';
-import { StoreEntity } from '../../stores';
 import { BaseModel, Trim } from '../../../packages';
+import { LampeEntity, StoreEntity } from '../../devices';
 
 export class createEtageDto extends BaseModel {
   @IsNotEmpty()

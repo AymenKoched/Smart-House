@@ -18,14 +18,14 @@ export class EtagesController {
   @Get()
   @ConvertResponse(EtageResponse)
   async getAll(): Promise<EtageResponse[]> {
-    const etages = await this.etagesService.findAll();
+    const etages = await this.etagesService.findAll(['lampes', 'stores']);
     return etages.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
   }
 
   @Get(':id')
   @ConvertResponse(EtageResponse)
   async getById(@Param('id') id: string): Promise<EtageResponse> {
-    return this.etagesService.findById(id);
+    return this.etagesService.findById(id, ['lampes', 'stores']);
   }
 
   @Post()
