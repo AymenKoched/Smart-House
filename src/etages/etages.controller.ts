@@ -46,6 +46,6 @@ export class EtagesController {
   @Delete(':id')
   @ConvertResponse(EtageResponse)
   async delete(@Param('id') id: string): Promise<EtageResponse[]> {
-    return this.etagesService.deleteById(id);
+    return this.etagesService.deleteEtage(id);
   }
 }

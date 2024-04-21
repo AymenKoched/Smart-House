@@ -7,7 +7,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { CartesService } from './cates.service';
+import { CartesService } from './cartes.service';
 import { ConvertResponse } from '../../packages';
 import { CarteResponse, createCarteDto, updateCarteDto } from './dto';
 
@@ -46,6 +46,6 @@ export class CartesController {
   @Delete(':id')
   @ConvertResponse(CarteResponse)
   async delete(@Param('id') id: string): Promise<CarteResponse[]> {
-    return this.cartesService.deleteById(id);
+    return this.cartesService.deleteCarte(id);
   }
 }

@@ -1,5 +1,6 @@
 import { BaseResponse } from '../../../packages';
-import { Expose } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
+import { LampeEntity, StoreEntity } from '../../devices';
 
 export class CarteResponse extends BaseResponse {
   @Expose()
@@ -10,4 +11,12 @@ export class CarteResponse extends BaseResponse {
 
   @Expose()
   adresseIp!: string;
+
+  @Type(() => LampeEntity)
+  @Expose()
+  lampes?: LampeEntity[];
+
+  @Type(() => StoreEntity)
+  @Expose()
+  stores?: StoreEntity[];
 }
