@@ -5,7 +5,7 @@ import {
   UpdateResult,
 } from 'typeorm';
 import { BaseEntity } from './base.entity';
-import { EntityConstructor } from '../utils';
+import { EntityConstructor } from '../utils-nest';
 import { InjectDataSource } from '@nestjs/typeorm';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import { forEach } from 'lodash';

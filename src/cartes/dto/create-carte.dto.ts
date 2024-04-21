@@ -1,10 +1,10 @@
-import { IsNotEmpty, IsOptional, Min } from 'class-validator';
+import { BaseModel, Trim } from '../../../packages';
 import { Type } from 'class-transformer';
 import { LampeEntity } from '../../lampes';
 import { StoreEntity } from '../../stores';
-import { BaseModel, Trim } from '../../../packages';
+import { IsNotEmpty, IsOptional, Min } from 'class-validator';
 
-export class createEtageDto extends BaseModel {
+export class createCarteDto extends BaseModel {
   @IsNotEmpty()
   @Type(() => String)
   @Trim()
@@ -13,13 +13,18 @@ export class createEtageDto extends BaseModel {
   @IsNotEmpty()
   @Type(() => Number)
   @Min(0)
-  nbChambres!: number;
+  nbPins!: number;
+
+  @IsNotEmpty()
+  @Type(() => String)
+  @Trim()
+  adresseIp!: string;
 
   @IsOptional()
   @Type(() => LampeEntity)
-  lampes: LampeEntity[];
+  lampes?: LampeEntity[];
 
   @IsOptional()
   @Type(() => StoreEntity)
-  stores: StoreEntity[];
+  stores?: StoreEntity[];
 }
