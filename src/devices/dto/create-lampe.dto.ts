@@ -1,22 +1,25 @@
+import { BaseModel, Trim } from '../../../packages';
+import { IsNotEmpty, Min } from 'class-validator';
 import { Type } from 'class-transformer';
-import { IsOptional } from 'class-validator';
 import { CarteEntity } from '../../cartes';
 import { EtageEntity } from '../../etages';
 
-export class findLampeDto {
-  @IsOptional()
+export class CreateLampeDto extends BaseModel {
+  @IsNotEmpty()
   @Type(() => String)
-  nom: string;
+  @Trim()
+  nom!: string;
 
-  @IsOptional()
+  @IsNotEmpty()
   @Type(() => Number)
-  pin: number;
+  @Min(0)
+  pin!: number;
 
-  @IsOptional()
+  @IsNotEmpty()
   @Type(() => CarteEntity)
   carte: CarteEntity;
 
-  @IsOptional()
+  @IsNotEmpty()
   @Type(() => EtageEntity)
   etage: EtageEntity;
 }

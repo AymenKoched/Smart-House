@@ -9,12 +9,12 @@ export abstract class CrudService<TEntity extends BaseEntity = BaseEntity> {
 
   constructor(private readonly repository: BaseRepository<TEntity>) {}
 
-  async findAll(): Promise<TEntity[]> {
-    return this.repository.findAll();
+  async findAll(expands?: string[]): Promise<TEntity[]> {
+    return this.repository.findAll(expands);
   }
 
-  async findById(id: string): Promise<TEntity> {
-    const item = await this.repository.findById(id);
+  async findById(id: string, expands?: string[]): Promise<TEntity> {
+    const item = await this.repository.findById(id, expands);
     if (!item) {
       throw new NotFoundException(
         this.notFoundErrorKey,

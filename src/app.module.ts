@@ -6,8 +6,7 @@ import * as process from 'process';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CartesModule } from './cartes';
 import { EtagesModule } from './etages';
-import { LampesModule } from './lampes';
-import { StoresModule } from './stores';
+import { DevicesModule } from './devices';
 
 @Module({
   imports: [
@@ -30,8 +29,7 @@ import { StoresModule } from './stores';
     }),
     CartesModule,
     EtagesModule,
-    LampesModule,
-    StoresModule,
+    DevicesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

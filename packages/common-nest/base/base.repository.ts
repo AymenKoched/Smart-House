@@ -19,12 +19,19 @@ export abstract class BaseRepository<TEntity extends BaseEntity = BaseEntity> {
     return this.dataSource.getRepository(this.entityType);
   }
 
-  async findAll(): Promise<TEntity[]> {
-    return this.repo.find();
+  async findAll(expands?: string[]): Promise<TEntity[]> {
+    if (expands && expands.length > 0) {
+      return this.repo.find({ relations: expands });
+    } else {
+      return this.repo.find();
+    }
   }
 
-  async findById(id: string): Promise<TEntity | null> {
-    return this.repo.findOneBy({ id } as FindOptionsWhere<TEntity>);
+  async findById(id: string, expands?: string[]): Promise<TEntity | null> {
+    return this.repo.findOne({
+      relations: expands,
+      where: { id } as FindOptionsWhere<TEntity>,
+    });
   }
 
   async updateById(

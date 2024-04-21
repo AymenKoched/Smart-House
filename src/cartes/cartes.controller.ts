@@ -36,7 +36,7 @@ export class CartesController {
 
   @Patch(':id')
   @ConvertResponse(CarteResponse)
-  async updateCarte(
+  async update(
     @Param('id') id: string,
     @Body() updatedCarte: updateCarteDto,
   ): Promise<CarteResponse> {
@@ -45,7 +45,7 @@ export class CartesController {
 
   @Delete(':id')
   @ConvertResponse(CarteResponse)
-  async deleteCarte(@Param('id') id: string): Promise<CarteResponse[]> {
+  async delete(@Param('id') id: string): Promise<CarteResponse[]> {
     return this.cartesService.deleteById(id);
   }
 }
