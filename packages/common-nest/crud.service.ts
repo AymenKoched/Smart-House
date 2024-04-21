@@ -1,8 +1,7 @@
 import { HttpException, HttpStatus, NotFoundException } from '@nestjs/common';
-import { BaseEntity } from './base.entity';
-import { BaseRepository } from './base.repository';
+import { BaseEntity, BaseRepository } from './base';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
-import { handle_error } from './unique-error';
+import { handle_error } from './utils';
 
 export abstract class CrudService<TEntity extends BaseEntity = BaseEntity> {
   protected abstract notFoundErrorKey: string;

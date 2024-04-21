@@ -1,5 +1,5 @@
 import { plainToInstance } from 'class-transformer';
-import { BaseResponse } from './base.response';
+import { BaseResponse } from '../base';
 
 export function ConvertResponse(response: typeof BaseResponse) {
   return function (
