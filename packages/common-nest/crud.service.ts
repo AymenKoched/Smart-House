@@ -1,9 +1,8 @@
-import { NotFoundException } from '@nestjs/common';
+import { HttpException, HttpStatus, NotFoundException } from '@nestjs/common';
 import { BaseEntity } from './base.entity';
 import { BaseRepository } from './base.repository';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
-import { DeepPartial, UpdateResult } from 'typeorm';
-import { isArray } from 'lodash';
+import { handle_error } from './unique-error';
 
 export abstract class CrudService<TEntity extends BaseEntity = BaseEntity> {
   protected abstract notFoundErrorKey: string;
@@ -16,23 +15,37 @@ export abstract class CrudService<TEntity extends BaseEntity = BaseEntity> {
   }
 
   async findById(id: string): Promise<TEntity> {
-    return this.repository.findById(id);
+    const item = await this.repository.findById(id);
+    if (!item) {
+      throw new NotFoundException(
+        this.notFoundErrorKey,
+        this.notFoundErrorMessage,
+      );
+    }
+
+    return item;
   }
 
-  async create(
-    entity: QueryDeepPartialEntity<TEntity> | DeepPartial<TEntity>[],
-  ): Promise<TEntity> {
-    const ctor = this.repository.entityType;
-    const data = isArray(entity)
-      ? entity.map((e) => new ctor(e))
-      : new ctor(entity);
-    return this.repository.repo.save(data);
+  async create(entity: QueryDeepPartialEntity<TEntity>): Promise<TEntity> {
+    try {
+      const ctor = this.repository.entityType;
+      const data = new ctor(entity);
+      return await this.repository.repo.save(data);
+    } catch (err) {
+      const errors = handle_error(err);
+      const error = {
+        message: errors,
+        error: 'Bad Request',
+        statusCode: 400,
+      };
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
   }
 
   async updateById(
     id: string,
     partial: QueryDeepPartialEntity<TEntity>,
-  ): Promise<UpdateResult> {
+  ): Promise<TEntity> {
     const found = await this.repository.repo.preload(
       new this.repository.entityType({ id, ...partial }),
     );
@@ -42,7 +55,8 @@ export abstract class CrudService<TEntity extends BaseEntity = BaseEntity> {
         this.notFoundErrorMessage,
       );
     }
-    return this.repository.updateById(id, partial);
+    await this.repository.updateById(id, partial);
+    return this.findById(id);
   }
 
   async deleteById(id: string): Promise<TEntity[]> {
