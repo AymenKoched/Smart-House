@@ -2,22 +2,20 @@ export function handleError(err): string[] {
   const errors = [];
   console.log(err.message);
 
-  if (err.message.includes('Violation of UNIQUE KEY constraint')) {
+  if (err.message.includes('Cannot insert duplicate key row in object')) {
     // etage
-    if (err.message.includes('UQ_af84a20403d1e4ea8512c2fbe82')) {
-      errors.push('Nom must be unique');
+    if (err.message.includes('IDX_d7519e3baab32b1149f41217e9')) {
+      errors.push('this etage already exist');
     }
 
     // carte
-    if (err.message.includes('UQ_56499b87ce1a64a4f0c7ef51f6c')) {
-      errors.push('Adresse Ip must be unique');
+    if (err.message.includes('IDX_8355c21fd76a6551c1340b3462')) {
+      errors.push('this carte name already exist');
     }
-    if (err.message.includes('UQ_bde2621918444acfe2dda7054a0')) {
-      errors.push('Nom must be unique');
+    if (err.message.includes('IDX_840dd59c79b92c1d86ff05c9f7')) {
+      errors.push('this adresse IP  already exist');
     }
-  }
 
-  if (err.message.includes('Cannot insert duplicate key row in object')) {
     // lampe
     if (err.message.includes('IDX_5b1ce748cfe6a159661abc8925')) {
       errors.push('this lampe exist in this carte');
