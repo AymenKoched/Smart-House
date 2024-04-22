@@ -7,9 +7,11 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+
+import { ConvertResponse } from '../../packages';
+
 import { EtagesService } from './etages.service';
 import { createEtageDto, EtageResponse, updateEtageDto } from './dto';
-import { ConvertResponse } from '../../packages';
 
 @Controller({ path: 'etage' })
 export class EtagesController {

@@ -1,5 +1,6 @@
-import { BaseResponse } from '../../../packages';
 import { Expose, Type } from 'class-transformer';
+
+import { BaseResponse } from '../../../packages';
 import { CarteResponse } from '../../cartes';
 import { EtageResponse } from '../../etages';
 

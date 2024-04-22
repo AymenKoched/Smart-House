@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, NotFoundException } from '@nestjs/common';
-import { BaseEntity, BaseRepository } from './base';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
+
+import { BaseEntity, BaseRepository } from './base';
 import { handleError } from './utils-nest';
 
 export abstract class CrudService<TEntity extends BaseEntity = BaseEntity> {

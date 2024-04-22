@@ -1,5 +1,6 @@
-import { BaseRepository } from '../../../packages';
 import { Injectable } from '@nestjs/common';
+
+import { BaseRepository } from '../../../packages';
 import { StoreEntity } from '../entities';
 
 @Injectable()

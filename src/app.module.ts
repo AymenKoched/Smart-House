@@ -1,9 +1,11 @@
+import * as process from 'process';
+
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config';
-import * as process from 'process';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { CartesModule } from './cartes';
 import { EtagesModule } from './etages';
 import { DevicesModule } from './devices';

@@ -4,11 +4,13 @@ import {
   Repository,
   UpdateResult,
 } from 'typeorm';
-import { BaseEntity } from './base.entity';
-import { EntityConstructor } from '../utils-nest';
 import { InjectDataSource } from '@nestjs/typeorm';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import { forEach } from 'lodash';
+
+import { EntityConstructor } from '../utils-nest';
+
+import { BaseEntity } from './base.entity';
 
 export abstract class BaseRepository<TEntity extends BaseEntity = BaseEntity> {
   public abstract entityType: EntityConstructor;

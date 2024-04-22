@@ -1,6 +1,7 @@
-import { BaseModel, Trim } from '../../../packages';
 import { IsNotEmpty, Min } from 'class-validator';
 import { Type } from 'class-transformer';
+
+import { BaseModel, Trim } from '../../../packages';
 import { CarteEntity } from '../../cartes';
 import { EtageEntity } from '../../etages';
 

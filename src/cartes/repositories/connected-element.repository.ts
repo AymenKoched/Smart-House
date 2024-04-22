@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+
 import { BaseRepository } from '../../../packages';
 import { ConnectedElementEntity } from '../entities';
 

@@ -1,5 +1,6 @@
 import { IsNotEmpty, IsOptional, Min } from 'class-validator';
 import { Type } from 'class-transformer';
+
 import { BaseModel, Trim } from '../../../packages';
 import { LampeEntity, StoreEntity } from '../../devices';
 

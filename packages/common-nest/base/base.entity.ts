@@ -7,7 +7,9 @@ import {
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
 import { getRandomString } from '../utils-nest';
+
 import { BaseModel } from './base.model';
 
 export abstract class BaseEntity extends BaseModel {
