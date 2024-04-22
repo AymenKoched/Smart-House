@@ -3,12 +3,15 @@ import { Expose, Type } from 'class-transformer';
 import { CarteResponse } from '../../cartes';
 import { EtageResponse } from '../../etages';
 
-export class LampeResponse extends BaseResponse {
+export class StoreResponse extends BaseResponse {
   @Expose()
   nom!: string;
 
   @Expose()
-  pin!: number;
+  pin1!: number;
+
+  @Expose()
+  pin2!: number;
 
   @Type(() => CarteResponse)
   @Expose()

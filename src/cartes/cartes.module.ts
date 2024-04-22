@@ -1,10 +1,11 @@
 import { forwardRef, Module } from '@nestjs/common';
-import { CartesController } from './cartes.controller';
-import { CartesService } from './cartes.service';
-import { CartesRepository } from './repositories';
+import { CartesController } from './controllers';
+import { CartesService } from './services';
+import { CartesRepository, ConnectedElementRepository } from './repositories';
 import { CarteEntity } from './entities';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DevicesModule } from '../devices';
+import { ConnectedElementService } from './services';
 
 @Module({
   imports: [
@@ -12,7 +13,12 @@ import { DevicesModule } from '../devices';
     forwardRef(() => DevicesModule),
   ],
   controllers: [CartesController],
-  providers: [CartesService, CartesRepository],
-  exports: [CartesService],
+  providers: [
+    CartesService,
+    CartesRepository,
+    ConnectedElementService,
+    ConnectedElementRepository,
+  ],
+  exports: [CartesService, ConnectedElementService],
 })
 export class CartesModule {}

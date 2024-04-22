@@ -2,6 +2,7 @@ import { Column, Entity, Index, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../../packages';
 import { Expose } from 'class-transformer';
 import { LampeEntity, StoreEntity } from '../../devices';
+import { ConnectedElementEntity } from './connected-element.entity';
 
 @Entity({ name: 'cartes' })
 export class CarteEntity extends BaseEntity {
@@ -26,4 +27,10 @@ export class CarteEntity extends BaseEntity {
 
   @OneToMany(() => StoreEntity, (store) => store.carte)
   stores?: StoreEntity[];
+
+  @OneToMany(
+    () => ConnectedElementEntity,
+    (connectedElement) => connectedElement.carte,
+  )
+  connectedElements!: ConnectedElementEntity[];
 }

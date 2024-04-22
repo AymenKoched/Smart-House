@@ -1,6 +1,7 @@
 import { BaseResponse } from '../../../packages';
 import { Expose, Type } from 'class-transformer';
-import { LampeEntity, StoreEntity } from '../../devices';
+import { LampeResponse, StoreResponse } from '../../devices';
+import { ConnectedElementResponse } from './connected-element.response';
 
 export class CarteResponse extends BaseResponse {
   @Expose()
@@ -12,11 +13,15 @@ export class CarteResponse extends BaseResponse {
   @Expose()
   adresseIp!: string;
 
-  @Type(() => LampeEntity)
+  @Type(() => LampeResponse)
   @Expose()
-  lampes?: LampeEntity[];
+  lampes?: LampeResponse[];
 
-  @Type(() => StoreEntity)
+  @Type(() => StoreResponse)
   @Expose()
-  stores?: StoreEntity[];
+  stores?: StoreResponse[];
+
+  @Type(() => ConnectedElementResponse)
+  @Expose()
+  connectedElements?: ConnectedElementResponse[];
 }

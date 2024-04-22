@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CrudService, NotFoundErrors } from '../../packages';
-import { CarteEntity } from './entities';
-import { CartesRepository } from './repositories';
-import { CarteResponse } from './dto';
+import { CrudService, NotFoundErrors } from '../../../packages';
+import { CarteEntity } from '../entities';
+import { CartesRepository } from '../repositories';
+import { CarteResponse } from '../dto';
 import { map } from 'lodash';
-import { LampesService } from '../devices';
+import { LampesService } from '../../devices';
 
 @Injectable()
 export class CartesService extends CrudService<CarteEntity> {
@@ -17,6 +17,8 @@ export class CartesService extends CrudService<CarteEntity> {
   ) {
     super(carteRepo);
   }
+
+  // async createCarte(newCarte: createCarteDto): Promise<CarteResponse> {}
 
   async deleteCarte(id: string): Promise<CarteResponse[]> {
     const toBeDeletedCarte = await this.findById(id, ['lampes', 'stores']);

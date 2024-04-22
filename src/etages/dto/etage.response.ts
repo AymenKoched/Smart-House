@@ -1,6 +1,6 @@
 import { Expose, Type } from 'class-transformer';
 import { BaseResponse } from '../../../packages';
-import { LampeEntity, StoreEntity } from '../../devices';
+import { LampeResponse, StoreResponse } from '../../devices';
 
 export class EtageResponse extends BaseResponse {
   @Expose()
@@ -9,11 +9,11 @@ export class EtageResponse extends BaseResponse {
   @Expose()
   nbChambres!: number;
 
-  @Type(() => LampeEntity)
+  @Type(() => LampeResponse)
   @Expose()
-  lampes?: LampeEntity[];
+  lampes?: LampeResponse[];
 
-  @Type(() => StoreEntity)
+  @Type(() => StoreResponse)
   @Expose()
-  stores?: StoreEntity[];
+  stores?: StoreResponse[];
 }
