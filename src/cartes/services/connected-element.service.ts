@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { UpdateResult } from 'typeorm';
 
 import { CrudService, NotFoundErrors } from '../../../packages';
 import { ConnectedElementRepository } from '../repositories';
@@ -14,5 +15,13 @@ export class ConnectedElementService extends CrudService<ConnectedElementEntity>
     private readonly connectedElementRepo: ConnectedElementRepository,
   ) {
     super(connectedElementRepo);
+  }
+
+  async addDeviceToPin(
+    pin: number,
+    carteId: string,
+    deviceId: string,
+  ): Promise<UpdateResult> {
+    return this.updateByCriteria({ pin, carte: { id: carteId } }, { deviceId });
   }
 }

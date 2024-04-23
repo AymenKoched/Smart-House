@@ -58,6 +58,13 @@ export abstract class BaseRepository<TEntity extends BaseEntity = BaseEntity> {
     return result;
   }
 
+  async updateByCriteria(
+    criteria: FindOptionsWhere<TEntity>,
+    partialEntity: QueryDeepPartialEntity<TEntity>,
+  ): Promise<UpdateResult> {
+    return this.repo.update(criteria, partialEntity);
+  }
+
   async deleteById(id: string): Promise<TEntity[]> {
     return this.deleteByCriteria({ id } as FindOptionsWhere<TEntity>);
   }

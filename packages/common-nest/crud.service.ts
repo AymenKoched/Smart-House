@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, NotFoundException } from '@nestjs/common';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
+import { FindOptionsWhere, UpdateResult } from 'typeorm';
 
 import { BaseEntity, BaseRepository } from './base';
 import { handleError } from './utils-nest';
@@ -57,6 +58,13 @@ export abstract class CrudService<TEntity extends BaseEntity = BaseEntity> {
     }
     await this.repository.updateById(id, partial);
     return this.findById(id);
+  }
+
+  async updateByCriteria(
+    criteria: FindOptionsWhere<TEntity>,
+    partial: QueryDeepPartialEntity<TEntity>,
+  ): Promise<UpdateResult> {
+    return this.repository.updateByCriteria(criteria, partial);
   }
 
   async deleteById(id: string): Promise<TEntity[]> {
