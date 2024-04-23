@@ -24,12 +24,12 @@ export class LampesController {
   @Post()
   @ConvertResponse(LampeResponse)
   async create(@Body() newLampe: CreateLampeDto): Promise<LampeResponse> {
-    return this.lampesService.create(newLampe);
+    return this.lampesService.createLampe(newLampe);
   }
 
   @Delete(':id')
   @ConvertResponse(LampeResponse)
   async delete(@Param('id') id: string): Promise<LampeResponse[]> {
-    return this.lampesService.deleteById(id);
+    return this.lampesService.deleteLampeById(id);
   }
 }

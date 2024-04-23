@@ -22,10 +22,10 @@ export function handleError(err): string[] {
     }
 
     // lampe
-    if (err.message.includes('IDX_5b1ce748cfe6a159661abc8925')) {
+    if (err.message.includes('IDX_c74ed33107851de5f42f654d9f')) {
       errors.push('this lampe exist in this carte');
     }
-    if (err.message.includes('IDX_4c989136240fa7a5c43ba3e965')) {
+    if (err.message.includes('IDX_c95ae754db825a7632b28602dd')) {
       errors.push('this lampe exist in this etage');
     }
   }

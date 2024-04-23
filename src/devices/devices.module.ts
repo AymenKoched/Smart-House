@@ -4,13 +4,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConnectedElementsModule } from '../cartes';
 
 import { LampesRepository, StoresRepository } from './repositories';
-import { LampeEntity, StoreEntity } from './entities';
+import { DeviceEntity, LampeEntity, StoreEntity } from './entities';
 import { LampesController, StoresController } from './controllers';
 import { LampesService, StoresService } from './services';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([LampeEntity, StoreEntity]),
+    TypeOrmModule.forFeature([LampeEntity, StoreEntity, DeviceEntity]),
     forwardRef(() => ConnectedElementsModule),
   ],
   controllers: [LampesController, StoresController],

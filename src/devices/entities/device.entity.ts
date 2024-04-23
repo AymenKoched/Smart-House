@@ -1,4 +1,4 @@
-import { Column, Entity, Index, ManyToOne } from 'typeorm';
+import { Column, Entity, Index, ManyToOne, JoinColumn } from 'typeorm';
 import { Expose } from 'class-transformer';
 
 import { BaseEntity } from '../../../packages';
@@ -13,7 +13,12 @@ export abstract class DeviceEntity extends BaseEntity {
   @Expose()
   nom!: string;
 
+  @Column()
+  @Expose()
+  carteId!: string;
+
   @ManyToOne(() => CarteEntity)
+  @JoinColumn({ name: 'carteId' })
   carte!: CarteEntity;
 
   @ManyToOne(() => EtageEntity)

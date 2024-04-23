@@ -2,7 +2,6 @@ import { IsNotEmpty, Min } from 'class-validator';
 import { Type } from 'class-transformer';
 
 import { BaseModel, Trim } from '../../../packages';
-import { CarteEntity } from '../../cartes';
 import { EtageEntity } from '../../etages';
 
 export class CreateLampeDto extends BaseModel {
@@ -17,8 +16,7 @@ export class CreateLampeDto extends BaseModel {
   pin!: number;
 
   @IsNotEmpty()
-  @Type(() => CarteEntity)
-  carte: CarteEntity;
+  carteId!: string;
 
   @IsNotEmpty()
   @Type(() => EtageEntity)
