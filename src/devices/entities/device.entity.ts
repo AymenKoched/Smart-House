@@ -6,16 +6,16 @@ import { CarteEntity } from '../../cartes';
 import { EtageEntity } from '../../etages';
 
 @Entity({ name: 'device' })
-@Index(['nom', 'etage'], { unique: true })
-@Index(['nom', 'carte'], { unique: true })
+@Index(['nom', 'etage'], { unique: true, where: `deleted_at is null` })
+@Index(['nom', 'carte'], { unique: true, where: `deleted_at is null` })
 export abstract class DeviceEntity extends BaseEntity {
   @Column({ length: 100 })
   @Expose()
   nom!: string;
 
-  @ManyToOne(() => CarteEntity, (carte) => carte.lampes)
+  @ManyToOne(() => CarteEntity)
   carte!: CarteEntity;
 
-  @ManyToOne(() => EtageEntity, (etage) => etage.lampes)
+  @ManyToOne(() => EtageEntity)
   etage!: EtageEntity;
 }

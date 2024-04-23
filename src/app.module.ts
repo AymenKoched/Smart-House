@@ -6,7 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CartesModule } from './cartes';
+import { CartesModule, ConnectedElementsModule } from './cartes';
 import { EtagesModule } from './etages';
 import { DevicesModule } from './devices';
 
@@ -32,6 +32,7 @@ import { DevicesModule } from './devices';
     CartesModule,
     EtagesModule,
     DevicesModule,
+    ConnectedElementsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

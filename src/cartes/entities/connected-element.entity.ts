@@ -1,12 +1,12 @@
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, Index, ManyToOne } from 'typeorm';
 import { Expose } from 'class-transformer';
 
 import { BaseEntity } from '../../../packages';
-import { DeviceEntity } from '../../devices';
 
 import { CarteEntity } from './carte.entity';
 
 @Entity({ name: 'connected_elements' })
+@Index(['pin', 'carte'], { unique: true })
 export class ConnectedElementEntity extends BaseEntity {
   protected keyPrefix = 'cnx_element_';
 
@@ -14,8 +14,9 @@ export class ConnectedElementEntity extends BaseEntity {
   @Expose()
   pin!: number;
 
-  @ManyToOne(() => DeviceEntity, { nullable: true })
-  device!: DeviceEntity;
+  @Column({ nullable: true })
+  @Expose()
+  deviceId?: string;
 
   @ManyToOne(() => CarteEntity, (carte) => carte.connectedElements)
   carte!: CarteEntity;

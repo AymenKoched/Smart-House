@@ -5,22 +5,18 @@ import { DevicesModule } from '../devices';
 
 import { CartesController } from './controllers';
 import { CartesService } from './services';
-import { CartesRepository, ConnectedElementRepository } from './repositories';
-import { CarteEntity, ConnectedElementEntity } from './entities';
-import { ConnectedElementService } from './services';
+import { CartesRepository } from './repositories';
+import { CarteEntity } from './entities';
+import { ConnectedElementsModule } from './connected-elements.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([CarteEntity, ConnectedElementEntity]),
+    TypeOrmModule.forFeature([CarteEntity]),
+    forwardRef(() => ConnectedElementsModule),
     forwardRef(() => DevicesModule),
   ],
   controllers: [CartesController],
-  providers: [
-    CartesService,
-    CartesRepository,
-    ConnectedElementService,
-    ConnectedElementRepository,
-  ],
-  exports: [CartesService, ConnectedElementService],
+  providers: [CartesService, CartesRepository],
+  exports: [CartesService],
 })
 export class CartesModule {}

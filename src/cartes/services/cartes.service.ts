@@ -32,7 +32,6 @@ export class CartesService extends CrudService<CarteEntity> {
       await this.connectedElementsService.create(
         new createConnectedElementDto({
           pin: i,
-          device: null,
           carte,
         }),
       );
@@ -44,7 +43,6 @@ export class CartesService extends CrudService<CarteEntity> {
     const toBeDeletedCarte = await this.findById(id, ['lampes', 'stores']);
 
     const toBeDeletedLampes = map(toBeDeletedCarte.lampes, (lampe) => lampe.id);
-    console.log({ toBeDeletedLampes });
 
     await Promise.all(
       map(toBeDeletedLampes, (lampeId) =>

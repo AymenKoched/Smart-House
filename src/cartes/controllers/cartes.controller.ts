@@ -8,16 +8,13 @@ import {
   Post,
 } from '@nestjs/common';
 
-import { CartesService, ConnectedElementService } from '../services';
+import { CartesService } from '../services';
 import { ConvertResponse } from '../../../packages';
 import { CarteResponse, createCarteDto, updateCarteDto } from '../dto';
 
 @Controller({ path: 'carte' })
 export class CartesController {
-  constructor(
-    private readonly cartesService: CartesService,
-    private readonly connectedElementsService: ConnectedElementService,
-  ) {}
+  constructor(private readonly cartesService: CartesService) {}
 
   @Get()
   @ConvertResponse(CarteResponse)
@@ -25,7 +22,7 @@ export class CartesController {
     const cartes = await this.cartesService.findAll([
       'lampes',
       'stores',
-      'connectedElements.device',
+      'connectedElements',
     ]);
     return cartes.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
   }
@@ -36,7 +33,7 @@ export class CartesController {
     return this.cartesService.findById(id, [
       'lampes',
       'stores',
-      'connectedElements.device',
+      'connectedElements',
     ]);
   }
 

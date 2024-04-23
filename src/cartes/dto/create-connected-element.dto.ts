@@ -1,8 +1,7 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 import { Type } from 'class-transformer';
 
 import { BaseModel } from '../../../packages';
-import { DeviceEntity } from '../../devices';
 import { CarteEntity } from '../entities';
 
 export class createConnectedElementDto extends BaseModel {
@@ -10,9 +9,8 @@ export class createConnectedElementDto extends BaseModel {
   @Type(() => String)
   pin!: number;
 
-  @IsNotEmpty()
-  @Type(() => DeviceEntity)
-  device!: DeviceEntity | null;
+  @IsOptional()
+  deviceId?: string;
 
   @IsNotEmpty()
   @Type(() => CarteEntity)

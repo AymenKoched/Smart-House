@@ -16,6 +16,11 @@ export function handleError(err): string[] {
       errors.push('this adresse IP  already exist');
     }
 
+    // connected elements
+    if (err.message.includes('IDX_e3df33e595fa9d874c1a7ddc34')) {
+      errors.push('this pin already exist in connected element');
+    }
+
     // lampe
     if (err.message.includes('IDX_5b1ce748cfe6a159661abc8925')) {
       errors.push('this lampe exist in this carte');
