@@ -36,7 +36,6 @@ export class LampesService extends CrudService<LampeEntity> {
 
   async deleteLampeById(id: string): Promise<LampeResponse[]> {
     const toBeDeleted = await this.findById(id);
-    console.log('delete lampe  carteId', toBeDeleted.carteId);
     await this.connectedElementsService.removeDeviceFromPin(
       toBeDeleted.pin,
       toBeDeleted.carteId,
