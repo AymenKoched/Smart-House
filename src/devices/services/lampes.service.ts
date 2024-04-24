@@ -3,8 +3,9 @@ import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { CrudService, NotFoundErrors } from '../../../packages';
 import { LampesRepository } from '../repositories';
 import { LampeEntity } from '../entities';
-import { ConnectedElementService } from '../../cartes';
+import { CartesService, ConnectedElementService } from '../../cartes';
 import { CreateLampeDto, LampeResponse } from '../dto';
+import { EtagesService } from '../../etages';
 
 @Injectable()
 export class LampesService extends CrudService<LampeEntity> {
@@ -15,16 +16,25 @@ export class LampesService extends CrudService<LampeEntity> {
     private readonly lampesRepo: LampesRepository,
     @Inject(forwardRef(() => ConnectedElementService))
     private readonly connectedElementsService: ConnectedElementService,
+    @Inject(forwardRef(() => CartesService))
+    private readonly cartesService: CartesService,
+    @Inject(forwardRef(() => EtagesService))
+    private readonly etagesService: EtagesService,
   ) {
     super(lampesRepo);
   }
 
   async createLampe(newLampe: CreateLampeDto): Promise<LampeResponse> {
+    await this.cartesService.findById(newLampe.carteId);
+    await this.etagesService.findById(newLampe.etageId);
+
     await this.connectedElementsService.checkPin(
       newLampe.pin,
       newLampe.carteId,
     );
+
     const lampe = await this.create(newLampe);
+
     await this.connectedElementsService.addDeviceToPin(
       lampe.pin,
       lampe.carteId,

@@ -1,7 +1,8 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { ConnectedElementsModule } from '../cartes';
+import { CartesModule, ConnectedElementsModule } from '../cartes';
+import { EtagesModule } from '../etages';
 
 import { LampesRepository, StoresRepository } from './repositories';
 import { DeviceEntity, LampeEntity, StoreEntity } from './entities';
@@ -12,6 +13,8 @@ import { LampesService, StoresService } from './services';
   imports: [
     TypeOrmModule.forFeature([LampeEntity, StoreEntity, DeviceEntity]),
     forwardRef(() => ConnectedElementsModule),
+    forwardRef(() => CartesModule),
+    forwardRef(() => EtagesModule),
   ],
   controllers: [LampesController, StoresController],
   providers: [LampesService, LampesRepository, StoresService, StoresRepository],

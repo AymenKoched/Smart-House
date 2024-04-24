@@ -21,6 +21,11 @@ export abstract class DeviceEntity extends BaseEntity {
   @JoinColumn({ name: 'carteId' })
   carte!: CarteEntity;
 
+  @Column()
+  @Expose()
+  etageId!: string;
+
   @ManyToOne(() => EtageEntity)
+  @JoinColumn({ name: 'etageId' })
   etage!: EtageEntity;
 }
