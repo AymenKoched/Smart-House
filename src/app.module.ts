@@ -9,6 +9,7 @@ import { AppService } from './app.service';
 import { CartesModule, ConnectedElementsModule } from './cartes';
 import { EtagesModule } from './etages';
 import { DevicesModule } from './devices';
+import { UsersModule } from './users';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { DevicesModule } from './devices';
     EtagesModule,
     DevicesModule,
     ConnectedElementsModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
