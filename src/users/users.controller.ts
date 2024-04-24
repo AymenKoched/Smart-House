@@ -20,7 +20,6 @@ export class UsersController {
 
   @UseGuards(JwtAuthGuard)
   @Put()
-  // @ConvertResponse(UserResponse)
   async updatePassword(
     @Body() updateUser: updateUserDto,
     @User() user: UserEntity,

@@ -6,13 +6,16 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 
 import { ConvertResponse } from '../../packages';
+import { JwtAuthGuard } from '../users';
 
 import { EtagesService } from './etages.service';
 import { createEtageDto, EtageResponse, updateEtageDto } from './dto';
 
+@UseGuards(JwtAuthGuard)
 @Controller({ path: 'etage' })
 export class EtagesController {
   constructor(private readonly etagesService: EtagesService) {}

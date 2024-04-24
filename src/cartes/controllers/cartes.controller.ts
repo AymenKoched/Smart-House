@@ -6,12 +6,15 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 
 import { CartesService } from '../services';
 import { ConvertResponse } from '../../../packages';
 import { CarteResponse, createCarteDto, updateCarteDto } from '../dto';
+import { JwtAuthGuard } from '../../users';
 
+@UseGuards(JwtAuthGuard)
 @Controller({ path: 'carte' })
 export class CartesController {
   constructor(private readonly cartesService: CartesService) {}

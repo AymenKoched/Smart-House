@@ -1,9 +1,19 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 
 import { LampesService } from '../services';
 import { ConvertResponse } from '../../../packages';
 import { CreateLampeDto, LampeResponse } from '../dto';
+import { JwtAuthGuard } from '../../users';
 
+@UseGuards(JwtAuthGuard)
 @Controller({ path: 'lampe' })
 export class LampesController {
   constructor(private readonly lampesService: LampesService) {}
