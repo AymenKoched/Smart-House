@@ -23,18 +23,18 @@ export function handleError(err): string[] {
 
     // lampe
     if (err.message.includes('IDX_c74ed33107851de5f42f654d9f')) {
-      errors.push('this lampe exist in this carte');
+      errors.push('this lampe nom exist in this carte');
     }
     if (err.message.includes('IDX_c95ae754db825a7632b28602dd')) {
-      errors.push('this lampe exist in this etage');
+      errors.push('this lampe nom exist in this etage');
     }
 
     // store
     if (err.message.includes('IDX_7eed6a018d076a4c623233cbbf')) {
-      errors.push('this lampe exist in this carte');
+      errors.push('this store nom exist in this carte');
     }
     if (err.message.includes('IDX_8e9f7a6cddb62b9e56ddb6c659')) {
-      errors.push('this lampe exist in this etage');
+      errors.push('this store nom exist in this etage');
     }
   }
 

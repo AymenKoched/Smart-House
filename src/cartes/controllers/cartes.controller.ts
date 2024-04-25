@@ -23,8 +23,8 @@ export class CartesController {
   @ConvertResponse(CarteResponse)
   async getAll(): Promise<CarteResponse[]> {
     const cartes = await this.cartesService.findAll([
-      'lampes',
-      'stores',
+      'lampes.etage',
+      'stores.etage',
       'connectedElements',
     ]);
     return cartes.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
@@ -34,8 +34,8 @@ export class CartesController {
   @ConvertResponse(CarteResponse)
   async getById(@Param('id') id: string): Promise<CarteResponse> {
     return this.cartesService.findById(id, [
-      'lampes',
-      'stores',
+      'lampes.etage',
+      'stores.etage',
       'connectedElements',
     ]);
   }

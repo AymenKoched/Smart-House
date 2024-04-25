@@ -43,7 +43,7 @@ export class StoresController {
     return this.storesService.deleteStoreById(id);
   }
 
-  @Get('/toggle/up/:delay')
+  @Get('toggle/up/:delay')
   @ConvertResponse(StoreResponse)
   async upStore(
     @Param('id') id: string,
@@ -52,7 +52,7 @@ export class StoresController {
     return this.storesService.upStore(id, delay);
   }
 
-  @Get('/toggle/down/:delay')
+  @Get('toggle/down/:delay')
   @ConvertResponse(StoreResponse)
   async downStore(
     @Param('id') id: string,
