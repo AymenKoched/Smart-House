@@ -35,7 +35,7 @@ export class ConnectedElementService extends CrudService<ConnectedElementEntity>
 
     if (!cnx) {
       const error = {
-        message: 'This pin does not exist',
+        message: `This pin ${pin} does not exist`,
         error: 'Bad Request',
         statusCode: 400,
       };
@@ -44,7 +44,7 @@ export class ConnectedElementService extends CrudService<ConnectedElementEntity>
 
     if (cnx.deviceId) {
       const error = {
-        message: 'This pin already used',
+        message: `This pin ${pin} already used`,
         error: 'Bad Request',
         statusCode: 400,
       };

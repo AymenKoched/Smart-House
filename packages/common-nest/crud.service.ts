@@ -56,8 +56,18 @@ export abstract class CrudService<TEntity extends BaseEntity = BaseEntity> {
         this.notFoundErrorMessage,
       );
     }
-    await this.repository.updateById(id, partial);
-    return this.findById(id);
+    try {
+      await this.repository.updateById(id, partial);
+      return this.findById(id);
+    } catch (err) {
+      const errors = handleError(err);
+      const error = {
+        message: errors,
+        error: 'Bad Request',
+        statusCode: 400,
+      };
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
   }
 
   async updateByCriteria(

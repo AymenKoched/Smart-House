@@ -2,7 +2,7 @@ import { Inject, Injectable, forwardRef } from '@nestjs/common';
 import { map } from 'lodash';
 
 import { CrudService, NotFoundErrors } from '../../packages';
-import { LampesService } from '../devices';
+import { LampesService, StoresService } from '../devices';
 
 import { EtageEntity } from './entities';
 import { EtagesRepository } from './repositories';
@@ -17,6 +17,8 @@ export class EtagesService extends CrudService<EtageEntity> {
     private readonly etagesRepo: EtagesRepository,
     @Inject(forwardRef(() => LampesService))
     private readonly lampesService: LampesService,
+    @Inject(forwardRef(() => StoresService))
+    private readonly storesService: StoresService,
   ) {
     super(etagesRepo);
   }
@@ -25,10 +27,17 @@ export class EtagesService extends CrudService<EtageEntity> {
     const toBeDeletedEtage = await this.findById(id, ['lampes', 'stores']);
 
     const toBeDeletedLampes = map(toBeDeletedEtage.lampes, (lampe) => lampe.id);
+    const toBeDeletedStores = map(toBeDeletedEtage.stores, (store) => store.id);
 
     await Promise.all(
       map(toBeDeletedLampes, (lampeId) =>
-        this.lampesService.deleteById(lampeId),
+        this.lampesService.deleteLampeById(lampeId),
+      ),
+    );
+
+    await Promise.all(
+      map(toBeDeletedStores, (storeId) =>
+        this.storesService.deleteStoreById(storeId),
       ),
     );
 

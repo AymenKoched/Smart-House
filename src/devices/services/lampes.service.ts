@@ -1,13 +1,16 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import { HttpService } from '@nestjs/axios';
 
-import { CrudService, NotFoundErrors } from '../../../packages';
+import {
+  CrudService,
+  NotFoundErrors,
+  sendMessageToCard,
+} from '../../../packages';
 import { LampesRepository } from '../repositories';
 import { LampeEntity } from '../entities';
-import { CartesRepository, CartesService, ConnectedElementService } from '../../cartes';
+import { CartesService, ConnectedElementService } from '../../cartes';
 import { CreateLampeDto, LampeResponse } from '../dto';
 import { EtagesService } from '../../etages';
-import { HttpService } from '@nestjs/axios';
-import { sendMessageToCard } from 'packages/card-utils';
 
 @Injectable()
 export class LampesService extends CrudService<LampeEntity> {
@@ -57,13 +60,16 @@ export class LampesService extends CrudService<LampeEntity> {
     return this.deleteById(id);
   }
 
-  async ToggleLampe(id : string , state : 'ON' | 'OFF' ) : Promise<LampeResponse>{
-    const lampe = await this.findById(id);
+  async ToggleLampe(
+    lampeId: string,
+    state: 'ON' | 'OFF',
+  ): Promise<LampeResponse> {
+    const lampe = await this.findById(lampeId, ['carte']);
     const pin = lampe.pin.toString().padStart(2, '0');
-    const carte = await this.cartesService.findById(lampe.carteId);
-    const ip = carte.adresseIp;
     const endpoint = `L${pin}${state}`;
-    sendMessageToCard(ip , endpoint);
+
+    await sendMessageToCard(lampe.carte.adresseIp, endpoint);
+
     return lampe;
   }
 }

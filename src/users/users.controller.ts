@@ -15,6 +15,7 @@ export class UsersController {
   @Post('login')
   @ConvertResponse(UserResponse)
   async logIn(@Body() loginUser: loginUserDto): Promise<UserResponse> {
+    console.log({ loginUser });
     return this.usersService.login(loginUser);
   }
 

@@ -28,6 +28,14 @@ export function handleError(err): string[] {
     if (err.message.includes('IDX_c95ae754db825a7632b28602dd')) {
       errors.push('this lampe exist in this etage');
     }
+
+    // store
+    if (err.message.includes('IDX_7eed6a018d076a4c623233cbbf')) {
+      errors.push('this lampe exist in this carte');
+    }
+    if (err.message.includes('IDX_8e9f7a6cddb62b9e56ddb6c659')) {
+      errors.push('this lampe exist in this etage');
+    }
   }
 
   if (

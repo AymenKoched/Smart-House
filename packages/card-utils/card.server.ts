@@ -1,8 +1,8 @@
-import axios, { AxiosResponse } from "axios";
+import axios from 'axios';
 
-export async function sendMessageToCard(ip:string , message : string): Promise<AxiosResponse | void>{
-  const port = 80 ;
-  const url = `http://${ip}:${port}/read_request`;
-  console.log(`message successfully sent ${message}`);
-  return await axios.post(url ,{ message });
+export async function sendMessageToCard(adresseIp: string, message: string) {
+  const port = 80;
+  const url = `http://${adresseIp}:${port}/read_request`;
+  const response = await axios.post(url, { message });
+  console.log(`Message sent successfully: ${message}  `, response.data);
 }

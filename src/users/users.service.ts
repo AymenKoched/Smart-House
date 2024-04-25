@@ -38,14 +38,14 @@ export class UsersService extends CrudService<UserEntity> {
         return new UserResponse({ username: user.username, token });
       }
       const error = {
-        message: 'incorrect Password',
+        message: 'incorrect password',
         error: 'Bad Request',
         statusCode: 400,
       };
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }
     const error = {
-      message: 'incorrect userName',
+      message: 'incorrect username',
       error: 'Bad Request',
       statusCode: 400,
     };
@@ -56,7 +56,7 @@ export class UsersService extends CrudService<UserEntity> {
     const user = await this.userRepo.repo.findOneBy({ username });
     if (user.password !== updateUser.oldPassword) {
       const error = {
-        message: 'incorrect Password',
+        message: 'incorrect oldPassword',
         error: 'Bad Request',
         statusCode: 400,
       };

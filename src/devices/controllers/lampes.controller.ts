@@ -5,7 +5,6 @@ import {
   Get,
   Param,
   Post,
-  Query,
   UseGuards,
 } from '@nestjs/common';
 
@@ -44,11 +43,12 @@ export class LampesController {
     return this.lampesService.deleteLampeById(id);
   }
 
-  @Post('/toggle/:state')
+  @Get('/toggle/:state')
   @ConvertResponse(LampeResponse)
-  async toggleLampe(@Query('id') id: string, @Param('state') state: 'ON' | 'OFF') {
+  async toggleLampe(
+    @Param('id') id: string,
+    @Param('state') state: 'ON' | 'OFF',
+  ): Promise<LampeResponse> {
     return this.lampesService.ToggleLampe(id, state);
-}
-
-
+  }
 }

@@ -32,7 +32,7 @@ async function bootstrap() {
   app.use(helmet());
 
   const corsOptions = {
-    origin: ['http://localhost:4000'],
+    origin: ['http://localhost:3000'],
   };
   app.enableCors(corsOptions);
 

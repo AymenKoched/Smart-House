@@ -9,6 +9,6 @@ export class updateUserDto extends BaseModel {
 
   @IsNotEmpty()
   @Trim()
-  @MinLength(8, { message: 'Password must be at least 8 characters' })
+  @MinLength(8, { message: 'password must be at least 8 characters' })
   password!: string;
 }

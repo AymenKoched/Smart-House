@@ -9,7 +9,7 @@ import {
   createCarteDto,
   createConnectedElementDto,
 } from '../dto';
-import { LampesService } from '../../devices';
+import { LampesService, StoresService } from '../../devices';
 
 import { ConnectedElementService } from './connected-element.service';
 
@@ -21,6 +21,7 @@ export class CartesService extends CrudService<CarteEntity> {
   constructor(
     private readonly carteRepo: CartesRepository,
     private readonly lampesService: LampesService,
+    private readonly storesService: StoresService,
     private readonly connectedElementsService: ConnectedElementService,
   ) {
     super(carteRepo);
@@ -40,13 +41,34 @@ export class CartesService extends CrudService<CarteEntity> {
   }
 
   async deleteCarte(id: string): Promise<CarteResponse[]> {
-    const toBeDeletedCarte = await this.findById(id, ['lampes', 'stores']);
+    const toBeDeletedCarte = await this.findById(id, [
+      'lampes',
+      'stores',
+      'connectedElements',
+    ]);
 
     const toBeDeletedLampes = map(toBeDeletedCarte.lampes, (lampe) => lampe.id);
+    const toBeDeletedStores = map(toBeDeletedCarte.stores, (store) => store.id);
+    const toBeDeletedConnectedElements = map(
+      toBeDeletedCarte.connectedElements,
+      (element) => element.id,
+    );
 
     await Promise.all(
       map(toBeDeletedLampes, (lampeId) =>
-        this.lampesService.deleteById(lampeId),
+        this.lampesService.deleteLampeById(lampeId),
+      ),
+    );
+
+    await Promise.all(
+      map(toBeDeletedStores, (storeId) =>
+        this.storesService.deleteStoreById(storeId),
+      ),
+    );
+
+    await Promise.all(
+      map(toBeDeletedConnectedElements, (elementId) =>
+        this.connectedElementsService.deleteById(elementId),
       ),
     );
 
