@@ -3,12 +3,15 @@ import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { CrudService, NotFoundErrors } from '../../../packages';
 import { LampesRepository } from '../repositories';
 import { LampeEntity } from '../entities';
-import { CartesService, ConnectedElementService } from '../../cartes';
+import { CartesRepository, CartesService, ConnectedElementService } from '../../cartes';
 import { CreateLampeDto, LampeResponse } from '../dto';
 import { EtagesService } from '../../etages';
+import { HttpService } from '@nestjs/axios';
+import { sendMessageToCard } from 'packages/card-utils';
 
 @Injectable()
 export class LampesService extends CrudService<LampeEntity> {
+  private httpService: HttpService;
   protected notFoundErrorKey = NotFoundErrors.LampesNotFound;
   protected notFoundErrorMessage = 'The lampes searched is not found';
 
@@ -52,5 +55,15 @@ export class LampesService extends CrudService<LampeEntity> {
     );
 
     return this.deleteById(id);
+  }
+
+  async ToggleLampe(id : string , state : 'ON' | 'OFF' ) : Promise<LampeResponse>{
+    const lampe = await this.findById(id);
+    const pin = lampe.pin.toString().padStart(2, '0');
+    const carte = await this.cartesService.findById(lampe.carteId);
+    const ip = carte.adresseIp;
+    const endpoint = `L${pin}${state}`;
+    sendMessageToCard(ip , endpoint);
+    return lampe;
   }
 }
