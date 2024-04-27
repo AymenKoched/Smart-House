@@ -62,7 +62,7 @@ export class LampesService extends CrudService<LampeEntity> {
 
   async ToggleLampe(
     lampeId: string,
-    state: 'ON' | 'OFF',
+    state: 'on' | 'off',
   ): Promise<LampeResponse> {
     const lampe = await this.findById(lampeId, ['carte']);
     const pin = lampe.pin.toString().padStart(2, '0');

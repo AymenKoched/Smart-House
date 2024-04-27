@@ -43,11 +43,11 @@ export class LampesController {
     return this.lampesService.deleteLampeById(id);
   }
 
-  @Get('toggle/:state')
+  @Get('toggle/:state/:id')
   @ConvertResponse(LampeResponse)
   async toggleLampe(
     @Param('id') id: string,
-    @Param('state') state: 'ON' | 'OFF',
+    @Param('state') state: 'on' | 'off',
   ): Promise<LampeResponse> {
     return this.lampesService.ToggleLampe(id, state);
   }
