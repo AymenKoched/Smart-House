@@ -1,21 +1,20 @@
-#include <WiFi.h> 
+s#include <WiFi.h> 
 #include <WebServer.h>
-#include <ArduinoJson.h> 
-const char* ssid = "SSID";
-const char* password = "YOUR-PASSWORD";
+#include <ArduinoJson.h>
+const char* ssid = "Your wifi ssid";
+const char* password = "your password";
 String M,aux ;
 WebServer server(80);
-
 void handleData() {
   if (server.hasArg("plain")) {
     String jsonMessage = server.arg("plain"); 
-    // Serial.print("Received JSON message: ");
-    // Serial.println(jsonMessage);
+    //Serial.print("Received JSON message: ");
+    //Serial.println(jsonMessage);
     StaticJsonDocument<200> doc; 
     DeserializationError error = deserializeJson(doc, jsonMessage);
     if (error) {
       server.send(400, "application/json", "Error parsing JSON");
-    }
+    } 
     else {
       const char* messageValue = doc["message"];
       M=String(messageValue);
@@ -26,18 +25,18 @@ void handleData() {
     server.send(400, "text/plain", "Missing JSON message");
   }
 }
-
 void setup() {
   Serial.begin(9600);
-  for(int i=0;i<34;i++){
-    if(!(6<=i<=11||i==0||i==1||i==3)){
-      pinMode(i,OUTPUT);
+  for(int i = 0; i < 34; i++) {
+    if(!( (6 <= i && i <= 11) || i == 0 || i == 1 || i == 3)) {
+        pinMode(i, OUTPUT);
     }
-  }
+}
   WiFi.begin(ssid, password);
   Serial.println("Connecting...");
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
+    //Serial.println(WiFi.status());
     Serial.println("Connecting...");
   }
   Serial.println(WiFi.localIP());
@@ -53,10 +52,14 @@ void loop() {
       int N = a.substring(1,3).toInt();
       String ch= a.substring(3,a.length());
       if(ch=="off"){
-        digitalWrite(N, 0);
+       // Serial.println(N);
+        digitalWrite(N, LOW);
+        delay(1000);
       }
       else if (ch=="on"){
-        digitalWrite(N, 1);
+        //Serial.println(N);
+        digitalWrite(N,HIGH);
+        delay(1000);
       }
     }
     else if ( a[0]=='W'){
