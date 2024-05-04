@@ -1,8 +1,8 @@
 #include <WiFi.h> 
 #include <WebServer.h>
 #include <ArduinoJson.h> 
-const char* ssid = "elite2.4G1";
-const char* password = "eliterobotique5G@";
+const char* ssid = "SSID";
+const char* password = "YOUR-PASSWORD";
 String M,aux ;
 WebServer server(80);
 
@@ -15,7 +15,7 @@ void handleData() {
     DeserializationError error = deserializeJson(doc, jsonMessage);
     if (error) {
       server.send(400, "application/json", "Error parsing JSON");
-    } 
+    }
     else {
       const char* messageValue = doc["message"];
       M=String(messageValue);
@@ -52,10 +52,10 @@ void loop() {
     if ( a[0]=='L'){
       int N = a.substring(1,3).toInt();
       String ch= a.substring(3,a.length());
-      if(ch=="OFF"){
+      if(ch=="off"){
         digitalWrite(N, 0);
       }
-      else if (ch=="ON"){
+      else if (ch=="on"){
         digitalWrite(N, 1);
       }
     }
