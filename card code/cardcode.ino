@@ -1,4 +1,4 @@
-s#include <WiFi.h> 
+#include <WiFi.h>
 #include <WebServer.h>
 #include <ArduinoJson.h>
 const char* ssid = "Your wifi ssid";
@@ -14,7 +14,7 @@ void handleData() {
     DeserializationError error = deserializeJson(doc, jsonMessage);
     if (error) {
       server.send(400, "application/json", "Error parsing JSON");
-    } 
+    }
     else {
       const char* messageValue = doc["message"];
       M=String(messageValue);
